@@ -2,3 +2,5 @@ Alors qu'Ethan était plongé dans son travail, sérieux et concentré, Clément
 Une étrange réaction se produisit alors : les écrans des deux ordinateurs commencèrent à briller d'une lumière surnaturelle, et un portail se forma entre eux, émettant des étincelles multicolores. Pris au dépourvu, Ethan et Clément se retrouvèrent aspirés par cette étrange force, entraînés dans un tourbillon chaotique.
 Quand ils reprirent leurs esprits, Ethan et Clément se retrouvèrent dans un endroit totalement inconnu, entourés par des décors étranges et des éclats de lumière. Ils réalisèrent bientôt qu'ils avaient été transportés dans la JAM, le monde de la compétition impitoyable où seuls les plus forts survivent.
 Désorientés mais déterminés, les deux amis comprirent qu'ils devraient unir leurs forces pour affronter les défis de la JAM et trouver un moyen de retourner chez eux. Leur aventure, qui avait commencé de manière inattendue, prenait désormais une toute nouvelle dimension, mêlant le réel et le virtuel dans une quête épique pour la survie et la victoire.
+
+Made by @EthanBranchereau and @gaillco
