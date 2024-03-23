@@ -4,8 +4,6 @@ GAME = zelda_generator
 all:
 	$(MAKE) -C map_generator
 	$(MAKE) -C game
-	mv map_generator/$(MAP_GEN) .
-	mv game/$(GAME) .
 
 clean:
 	$(MAKE) clean -C map_generator
@@ -19,5 +17,3 @@ re:	fclean all
 debug:	fclean
 	$(MAKE) debug -C map_generator
 	$(MAKE) debug -C game
-	mv map_generator/$(MAP_GEN) .
-	mv game/$(GAME) .
