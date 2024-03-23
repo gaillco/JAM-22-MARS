@@ -2,20 +2,7 @@
 #include <stdlib.h>
 #include <sys/time.h>
 #include "raylib.h"
-
-#define MAP_WIDTH 256
-#define MAP_HEIGHT 88
-#define TILE_SIZE 8
-
-typedef enum {
-    GRASS,
-    SAND,
-    WATER,
-    OBSTACLE_GREEN,
-    OBSTACLE_BROWN,
-} TerrainType;
-
-TerrainType map[MAP_HEIGHT][MAP_WIDTH];
+#include "../include/generator.h"
 
 void generate_random_walk(int startX, int startY, int steps) {
     int x = startX;
@@ -84,7 +71,7 @@ float **get_image_data(Image perlinImage) {
     return perlinNoise;
 }
 
-int main()
+int generate_map()
 {
     struct timeval time;
     gettimeofday(&time, NULL);
@@ -104,33 +91,6 @@ int main()
     float **perlinNoise = get_image_data(perlinImage);
 
     assign_terrain_type(perlinNoise);
-
-    Image mapImage = GenImageColor(MAP_WIDTH * TILE_SIZE, MAP_HEIGHT * TILE_SIZE, RAYWHITE);
-
-    for (int i = 0; i < MAP_HEIGHT; i++) {
-        for (int j = 0; j < MAP_WIDTH; j++) {
-            Rectangle dest = { j * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, TILE_SIZE };
-            switch (map[i][j]) {
-                case GRASS:
-                    ImageDrawRectangleRec(&mapImage, dest, GREEN);
-                    break;
-                case SAND:
-                    ImageDrawRectangleRec(&mapImage, dest, YELLOW);
-                    break;
-                case WATER:
-                    ImageDrawRectangleRec(&mapImage, dest, BLUE);
-                    break;
-                case OBSTACLE_GREEN:
-                    ImageDrawRectangleRec(&mapImage, dest, DARKGREEN);
-                    break;
-                case OBSTACLE_BROWN:
-                    ImageDrawRectangleRec(&mapImage, dest, BROWN);
-                    break;
-            }
-        }
-    }
-    
-    ExportImage(mapImage, "map.png");
 
     for (int i = 0; i < MAP_HEIGHT; i++) {
         free(perlinNoise[i]);
