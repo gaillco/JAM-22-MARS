@@ -1,27 +1,23 @@
-MAP_GEN =    generator
+MAP_GEN = generator
+GAME = zelda_generator
 
-MAP_GEN_SRC =	map_generator/map.c \
-                map_generator/map_generator.c \
-                map_generator/main_generator.c \
-
-MAP_GEN_OBJS = $(MAP_GEN_SRC:.c=.o)
-
-CFLAGS    =    -Wall -Wextra -Werror
-
-LDFLAGS    = -lraylib -lm
-
-all:    $(MAP_GEN)
-
-$(MAP_GEN):	$(MAP_GEN_OBJS)
-	$(CC) -o $(MAP_GEN) $(MAP_GEN_OBJS) $(LDFLAGS)
+all:
+	$(MAKE) -C map_generator
+	$(MAKE) -C game
+	mv map_generator/$(MAP_GEN) .
+	mv game/$(GAME) .
 
 clean:
-	$(RM) $(MAP_GEN_OBJS)
+	$(MAKE) clean -C map_generator
+	$(MAKE) clean -C game
 
 fclean:	clean
-	$(RM) $(MAP_GEN)
+	$(RM) $(MAP_GEN) $(GAME)
 
 re:	fclean all
 
 debug:	fclean
-	$(CC) -o $(MAP_GEN) $(MAP_GEN_SRC) $(LDFLAGS)
+	$(MAKE) debug -C map_generator
+	$(MAKE) debug -C game
+	mv map_generator/$(MAP_GEN) .
+	mv game/$(GAME) .

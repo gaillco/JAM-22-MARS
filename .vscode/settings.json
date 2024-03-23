@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "noise_generator.h": "c",
-        "generator.h": "c"
+        "generator.h": "c",
+        "game.h": "c"
     }
 }
