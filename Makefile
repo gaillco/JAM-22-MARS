@@ -1,4 +1,4 @@
-MAP_GEN =    push_generator
+MAP_GEN =    generator
 
 MAP_GEN_SRC = map_generator/map_generator.c
 
