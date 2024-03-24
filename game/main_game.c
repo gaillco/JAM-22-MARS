@@ -313,6 +313,16 @@ int main() {
 
     InitWindow(SCREEN_COLS * TEXTURE_SIZE, SCREEN_ROWS * TEXTURE_SIZE, "Overworld");
 
+    InitAudioDevice();
+
+    Sound fxWav;
+    int funny_or_not = rand() % 10;
+    if (funny_or_not == 0) {
+        fxWav = LoadSound("game/assets/xtal_rigolo.mp3");
+    } else {
+        fxWav = LoadSound("game/assets/xtal_normal.mp3");
+    }
+
     Player *player = init_player();
     load_textures();
 
@@ -321,6 +331,8 @@ int main() {
     Texture2D texture_goals = LoadTexture("game/assets/goals.png");
 
     SetTargetFPS(60);
+
+    PlaySound(fxWav);
 
     while (!WindowShouldClose()) {
         BeginDrawing();
@@ -339,6 +351,14 @@ int main() {
             pos_x = rand() % MAP_COLS;
             pos_y = rand() % MAP_ROWS;
             select_player_starting_tile(player, overworld, &pos_x, &pos_y);
+        }
+
+        if (IsKeyPressed(KEY_SPACE)) {
+            if (IsSoundPlaying(fxWav)) {
+                StopSound(fxWav);
+            } else {
+                PlaySound(fxWav);
+            }
         }
 
         move_player(player, overworld, &pos_x, &pos_y);
@@ -361,6 +381,12 @@ int main() {
     for (int i = 0; i < 5; i++) {
         UnloadTexture(textures[i]);
     }
+
+    UnloadSound(fxWav);
+
+    CloseAudioDevice();
+
+    CloseWindow();
 
     return 0;
 }
