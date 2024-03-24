@@ -262,8 +262,6 @@ void render_goals(Goals_t *goals, Texture2D texture_goals, int pos_x, int pos_y,
             DrawTexture(texture_goals, current->position.x, current->position.y, WHITE);
             Rectangle playerRec = { player->position.x, player->position.y, TEXTURE_SIZE, TEXTURE_SIZE };
             Rectangle goalRec = { current->position.x, current->position.y, TEXTURE_SIZE, TEXTURE_SIZE };
-            printf("Player at (%f, %f)\n", player->position.x, player->position.y);
-            printf("Goal at (%f, %f)\n", current->position.x, current->position.y);
             if (CheckCollisionRecs(playerRec, goalRec)) {
                 current->acquired = true;
             }
