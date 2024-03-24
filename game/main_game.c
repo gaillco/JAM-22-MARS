@@ -10,7 +10,8 @@
 #define MAP_COLS 16
 #define SCREEN_ROWS 11
 #define SCREEN_COLS 16
-#define TEXTURE_SIZE 32
+#define TEXTURE_SIZE 64
+#define PLAYER_SPEED 4
 
 #define PLAYER_TEXTURE_PATH "game/assets/link.png"
 #define GRASS_TEXTURE_PATH "game/assets/grass.png"
@@ -155,16 +156,16 @@ void move_player(Player *player, Overworld *overworld, int *pos_x, int *pos_y)
     int moveX = 0, moveY = 0;
 
     if (IsKeyDown(KEY_UP)) {
-        moveY = -2;
+        moveY = -PLAYER_SPEED;
     }
     if (IsKeyDown(KEY_DOWN)) {
-        moveY = 2;
+        moveY = PLAYER_SPEED;
     }
     if (IsKeyDown(KEY_LEFT)) {
-        moveX = -2;
+        moveX = -PLAYER_SPEED;
     }
     if (IsKeyDown(KEY_RIGHT)) {
-        moveX = 2;
+        moveX = PLAYER_SPEED;
     }
 
     playerRec.x += moveX;
@@ -274,7 +275,7 @@ void render_goals(Goals_t *goals, Texture2D texture_goals, int pos_x, int pos_y,
 void print_goals_coordinates(Goals_t *goals)
 {
     Goals_t *current = goals;
-    while (current != NULL) {
+    while (current != NULL && !current->acquired) {
         printf("Goal at (%d, %d)\n", current->pos_x, current->pos_y);
         current = current->next;
     }
