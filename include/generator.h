@@ -5,8 +5,8 @@
 #include <sys/time.h>
 #include "raylib.h"
 
-#define MAP_WIDTH 256
 #define MAP_HEIGHT 88
+#define MAP_WIDTH 256
 #define TILE_SIZE 8
 
 typedef enum {

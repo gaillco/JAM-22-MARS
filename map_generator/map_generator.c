@@ -4,6 +4,10 @@
 #include "raylib.h"
 #include "../include/generator.h"
 
+#define OBSTACLE_PROB 15
+#define PERLIN_OFFSET_X 1500
+#define PERLIN_OFFSET_Y 1500
+
 void generate_random_walk(int startX, int startY, int steps) {
     int x = startX;
     int y = startY;
@@ -33,7 +37,7 @@ void assign_terrain_type(float **heatmap) {
     for (int i = 0; i < MAP_HEIGHT; i++) {
         for (int j = 0; j < MAP_WIDTH; j++) {
             if (map[i][j] == GRASS) {
-                if (rand() % 100 < 1)
+                if (rand() % 100 < OBSTACLE_PROB)
                     map[i][j] = OBSTACLE_GREEN;
                 continue;
             }
@@ -42,12 +46,12 @@ void assign_terrain_type(float **heatmap) {
                 map[i][j] = WATER;
             else if (heatmap[i][j] < 0.5) {
                 map[i][j] = SAND;
-                if (rand() % 100 < 1)
+                if (rand() % 100 < OBSTACLE_PROB)
                     map[i][j] = OBSTACLE_BROWN;
             }
             else {
                 map[i][j] = GRASS;
-                if (rand() % 100 < 1)
+                if (rand() % 100 < OBSTACLE_PROB)
                     map[i][j] = OBSTACLE_GREEN;
             }
         }
@@ -78,6 +82,9 @@ int generate_map()
     long millis = (time.tv_sec * 1000) + (time.tv_usec / 1000);
     srand(millis);
 
+    int offsetX = rand() % PERLIN_OFFSET_X;
+    int offsetY = rand() % PERLIN_OFFSET_Y;
+
     for (int i = 0; i < MAP_HEIGHT; i++) {
         for (int j = 0; j < MAP_WIDTH; j++) {
             map[i][j] = WATER;
@@ -87,7 +94,7 @@ int generate_map()
     int steps = 7500 + rand() % (20000 - 7500 + 1);
     generate_random_walk(MAP_WIDTH + rand() % 100, MAP_HEIGHT + rand() % 100, steps);
 
-    Image perlinImage = GenImagePerlinNoise(MAP_WIDTH + rand() % 100, MAP_HEIGHT + rand() % 100, 16, 16, 1.0f);
+    Image perlinImage = GenImagePerlinNoise(MAP_WIDTH + offsetX, MAP_HEIGHT + offsetY, 16, 16, 1.0f);
     float **perlinNoise = get_image_data(perlinImage);
 
     assign_terrain_type(perlinNoise);

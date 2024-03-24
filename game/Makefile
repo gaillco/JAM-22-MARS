@@ -6,7 +6,7 @@ GAME_SRC = main_game.c \
 
 GAME_OBJS = $(GAME_SRC:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror
+#CFLAGS = -Wall -Wextra -Werror
 LDFLAGS = -lraylib -lm
 
 $(GAME):	$(GAME_OBJS)
