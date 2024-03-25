@@ -420,7 +420,22 @@ int main() {
 
     CloseAudioDevice();
 
+    UnloadTexture(texture_goals);
+
+    free(player);
+
+    free(overworld);
+
+    Goals_t *current = goals.next;
+
+    while (current != NULL) {
+        Goals_t *next = current->next;
+        free(current);
+        current = next;
+    }
+
     CloseWindow();
+
 
     return 0;
 }
