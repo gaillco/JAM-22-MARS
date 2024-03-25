@@ -273,8 +273,9 @@ void render_goals(Goals_t *goals, Texture2D texture_goals, int pos_x, int pos_y,
 void print_goals_coordinates(Goals_t *goals)
 {
     Goals_t *current = goals;
-    while (current != NULL && !current->acquired) {
-        printf("Goal at (%d, %d)\n", current->pos_x, current->pos_y);
+    while (current != NULL) {
+        if (!current->acquired)
+            printf("Goal at (%d, %d)\n", current->pos_x, current->pos_y);
         current = current->next;
     }
 }
